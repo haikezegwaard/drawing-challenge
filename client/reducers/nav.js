@@ -5,8 +5,11 @@ import { NavigationActions } from 'react-navigation';
 const firstAction = AppNavigator.router.getActionForPathAndParams('Main');
 const tempNavState = AppNavigator.router.getStateForAction(firstAction);
 const secondAction = AppNavigator.router.getActionForPathAndParams('Profile');
+const listingAction = AppNavigator.router.getActionForPathAndParams('Listing');
+
 const initialNavState = AppNavigator.router.getStateForAction(
   secondAction,
+  //listingAction,
   tempNavState
 );
 

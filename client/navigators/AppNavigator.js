@@ -5,10 +5,12 @@ import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
 import Main from '../components/main';
 import Profile from '../components/profile';
+import Listing from '../components/listing';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
   Profile: { screen: Profile },
+  Listing: {screen: Listing },
 });
 
 const AppWithNavigationState = ({ dispatch, nav }) => (

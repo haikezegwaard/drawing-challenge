@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
-import {View, Text} from 'react-native';
+import {Button, View, Text, FlatList} from 'react-native';
 
 export default class Profile extends Component {
+  static navigationOptions = {
+    title: 'Profile',
+  };
   render() {
+    const { navigate } = this.props.navigation;
     return (
-      <View style={{flexDirection: 'row', height: 100, padding: 20}}>
-        <View style={{backgroundColor: 'blue', flex: 0.3}} />
-        <View style={{backgroundColor: 'red', flex: 0.5}} />
+      <View>
         <Text>Profile!</Text>
+        <FlatList
+          data={[{key: 'a'}, {key: 'b'}]}
+          renderItem={({item}) => <Text>{item.key}</Text>}
+        />
+        <Button
+        title="Go back to home"
+        onPress={() =>
+          navigate('Main', {})
+        }
+      />
       </View>
     );
   }
