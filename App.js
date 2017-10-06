@@ -1,25 +1,38 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { AppRegistry } from 'react-native'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware, combineReducers, compose} from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import {createLogger} from 'redux-logger'
+import reducer from './client/reducers';
+import AppWithNavigationState from './client/navigators/AppNavigator';
 
-export default class App extends React.Component {
+
+// middleware that logs actions
+const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__  });
+
+function configureStore(initialState) {
+  const enhancer = compose(
+    applyMiddleware(
+      thunkMiddleware, // lets us dispatch() functions
+      loggerMiddleware,
+    ),
+  );
+  return createStore(reducer, initialState, enhancer);
+}
+
+class DrawingChallenge extends React.Component {
+  store = configureStore({});
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-        <Text>Hooray!</Text>
-
-      </View>
+      <Provider store={this.store}>
+        <AppWithNavigationState />
+      </Provider>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+AppRegistry.registerComponent('DrawingChallenge', () => DrawingChallenge);
+
+export default DrawingChallenge;
