@@ -17,6 +17,11 @@ export default function challenges(state = initialState, action) {
       return action.challenges;
     }
 
+    case actions.ADD_CHALLENGE: {
+      let newState = Object.assign({}, state)
+      newState.push(action.challenge);
+    }
+
     default: {
       return state;
     }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
-import Main from '../components/main';
+import Main from '../containers/MainContainer';
 import Profile from '../components/profile';
 import Listing from '../components/listing';
 
