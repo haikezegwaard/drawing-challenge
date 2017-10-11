@@ -13,50 +13,58 @@ export default class SubmitForm extends Component {
     super(props);
     this.state = {
       image: '',
+      description: '',
     }
+
   }
 
+  updateDescription(value){
+    this.setState({description: value});
+  }
 
   pickImage() {
-    const {addChallenge} = this.props.actions;
     // openSelectDialog(config, successCallback, errorCallback);
     ImagePickerIOS.openSelectDialog({}, imageUri => {
-      addChallenge(imageUri, this.textInput.value);
       this.setState({ image: imageUri });
-      console.log("image: "+imageUri);
-      console.log(this.textInput);
     }, error => console.error(error));
+  }
+
+  handleSubmit(){
+    const {addChallenge} = this.props.actions;
+    const { navigate } = this.props.navigation;
+    console.log('adding challenge');
+    console.log(this.state);
+    addChallenge(this.state.image, this.state.description).then(() => navigate('Listing', {}));
   }
 
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View>
-        <Card title='Inzenden'>
+        <Card title='Inzenden' image={this.state.image ? {uri: this.state.image} : null}>
           <Text style={{marginBottom: 10}}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dolor
-          urna, consectetur eu ornare vel, viverra a diam. Aenean tempus elit vel
-          ipsum dictum, sed tristique leo mollis.
+            {this.state.description}
           </Text>
-
-          <FormLabel>Titel</FormLabel>
-          <FormInput textInputRef={(thisInput) => {this.textInput = thisInput}}/>
-          <FormValidationMessage>Error message</FormValidationMessage><Button
+          <Button
             icon={{name: 'camera'}}
             backgroundColor='#03A9F4'
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
             title='Selecteer foto'
             onPress={() => this.pickImage() }
           />
-          {this.state.image ?
-            <Image source={{ uri: this.state.image}} style={{flex: 1}} /> : null
-          }
+          <FormLabel>Titel</FormLabel>
+          <FormInput
+            onChangeText={(value)=>{this.updateDescription(value)}}
+            value={this.state.description}
+          />
+          <FormValidationMessage>{this.state.description ? null : 'Geef een beschrijving op'}</FormValidationMessage>
+
           <Button
             icon={{name: 'check'}}
             backgroundColor='#03A9F4'
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
             title='Inzenden'
-            onPress={() => navigate('Listing', {}) }
+            onPress={()=>this.handleSubmit()}
           />
         </Card>
 

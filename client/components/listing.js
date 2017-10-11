@@ -9,25 +9,8 @@ export default class Listing extends Component {
   };
 
   static propTypes = {
-    actions: PropTypes.object.isRequired,
+    navigation: PropTypes.object.isRequired,
   };
-
-  constructor() {
-    super();
-    this.state = { image: null };
-  }
-
-  componentDidMount() {
-  }
-
-  pickImage() {
-    const {addChallenge} = this.props.actions;
-    // openSelectDialog(config, successCallback, errorCallback);
-    ImagePickerIOS.openSelectDialog({}, imageUri => {
-      addChallenge(imageUri, 'foobar');
-      this.setState({ image: imageUri });
-    }, error => console.error(error));
-  }
 
   render() {
     const { navigate } = this.props.navigation;
@@ -49,19 +32,6 @@ export default class Listing extends Component {
             keyExtractor={item => item.image}
           />
         }
-
-        <Button
-          title="Select image"
-          icon={{name: 'camera', type: 'font-awesome'}}
-          onPress={()=>this.pickImage()}
-          buttonStyle={{ backgroundColor: 'purple' }}
-          />
-        <Button
-        title="Go to Jane's profile"
-        onPress={() =>
-          navigate('Profile', { name: 'Jane' })
-        }
-      />
       </Card>
 
     );
