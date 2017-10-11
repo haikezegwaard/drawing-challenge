@@ -6,9 +6,10 @@ const firstAction = AppNavigator.router.getActionForPathAndParams('Main');
 const tempNavState = AppNavigator.router.getStateForAction(firstAction);
 const secondAction = AppNavigator.router.getActionForPathAndParams('Profile');
 const listingAction = AppNavigator.router.getActionForPathAndParams('Listing');
+const detailAction = AppNavigator.router.getActionForPathAndParams('Detail');
 
 const initialNavState = AppNavigator.router.getStateForAction(
-  secondAction,
+  firstAction,
   //listingAction,
   tempNavState
 );

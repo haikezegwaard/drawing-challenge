@@ -18,8 +18,7 @@ export default function challenges(state = initialState, action) {
     }
 
     case actions.ADD_CHALLENGE: {
-      let newState = Object.assign({}, state)
-      newState.push(action.challenge);
+      return [...state, action.challenge];
     }
 
     default: {

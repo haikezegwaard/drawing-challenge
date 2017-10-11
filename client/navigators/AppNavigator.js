@@ -1,16 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addNavigationHelpers, StackNavigator } from 'react-navigation';
+import { addNavigationHelpers, TabNavigator } from 'react-navigation';
 
 import Main from '../containers/MainContainer';
 import Profile from '../components/profile';
-import Listing from '../components/listing';
+import Listing from '../containers/ListingContainer';
+import Submit from '../containers/SubmitFormContainer';
 
-export const AppNavigator = StackNavigator({
+export const AppNavigator = TabNavigator({
   Main: { screen: Main },
   Profile: { screen: Profile },
   Listing: {screen: Listing },
+  Submit: {screen: Submit },
+},{
+  tabBarPosition: 'top',
+  animationEnabled: true,
+  tabBarOptions: {
+    activeTintColor: '#e91e63',
+  }
 });
 
 const AppWithNavigationState = ({ dispatch, nav }) => (

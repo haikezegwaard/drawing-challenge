@@ -1,60 +1,42 @@
-import React, { Component, PropTypes } from 'react';
-import {View, Text, Button, ImagePickerIOS, Image, FlatList} from 'react-native';
-import {addChallenge} from '../actions/challenges';
+import React, { Component } from 'react';
+import {View, Text, FlatList } from 'react-native';
+
+import { Card, ListItem, Button, Header, Tile } from 'react-native-elements'
 
 export default class Main extends Component {
   static navigationOptions = {
-    title: 'Welcome',
+    title: 'Main',
+    tabBarLabel: 'Main',
   };
-
-  static propTypes = {
-    actions: PropTypes.object.isRequired,
-  };
-
-  constructor() {
-    super();
-    this.state = { image: null };
-  }
-
-  componentDidMount() {
-  }
-
-  pickImage() {
-    const {addChallenge} = this.props.actions;
-    // openSelectDialog(config, successCallback, errorCallback);
-    ImagePickerIOS.openSelectDialog({}, imageUri => {
-      addChallenge(imageUri, 'foobar');
-      //this.setState({ image: imageUri });
-    }, error => console.error(error));
-  }
-
   render() {
     const { navigate } = this.props.navigation;
     const { challenges } = this.props;
     return (
-      <View style={{ flex: 1 }}>
-        {/*{this.state.image?*/}
-          {/*<Image style={{ flex: 1 }} source={{ uri: this.state.image }} /> :*/}
-          {/*null*/}
-        {/*}*/}
-        {/*{challenges &&*/}
-          {/*<FlatList*/}
-            {/*data={challenges}*/}
-            {/*renderItem={({item}) => <View><Image style={{ flex: 1 }} source={{ uri: item.image }} /><Text>{item.description}</Text></View>}*/}
-          {/*/>*/}
-        {/*}*/}
-        <Button
-          title="Select image"
-          onPress={()=>this.pickImage()}
+      <View>
+        <Card
+          title='Titel van challenge'
+          image={require('../images/landscape.jpg')}
+        >
+          <Text style={{marginBottom: 10}}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dolor
+          urna, consectetur eu ornare vel, viverra a diam. Aenean tempus elit vel
+          ipsum dictum, sed tristique leo mollis. Integer et finibus est. Etiam
+          interdum in dui sed consectetur. Nullam pulvinar odio in massa dapibus,
+          quis placerat neque blandit. Integer ultricies nulla mauris, vitae iaculis
+          enim finibus vel. Fusce pellentesque euismod nibh sodales tempor. Integer
+          ac erat rhoncus, tristique neque sit amet, pretium tortor. Nullam non odio
+          molestie mauris pulvinar sagittis. Class aptent taciti sociosqu ad litora
+          torquent per conubia nostra, per inceptos himenaeos.
+          </Text>
+          <Button
+            icon={{name: 'camera'}}
+            backgroundColor='#03A9F4'
+            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+            title='Meedoen!'
+            onPress={() => navigate('Submit', {}) }
           />
-        <Button
-        title="Go to Jane's profile"
-        onPress={() =>
-          navigate('Profile', { name: 'Jane' })
-        }
-      />
+        </Card>
       </View>
-
     );
   }
 }
