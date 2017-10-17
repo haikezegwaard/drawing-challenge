@@ -5,7 +5,7 @@ import {addChallenge} from '../actions/challenges';
 
 export default class Listing extends Component {
   static navigationOptions = {
-    title: 'Mijn Challenges',
+    title: 'Mijn Inzendingen',
   };
 
   static propTypes = {
@@ -26,7 +26,8 @@ export default class Listing extends Component {
                roundAvatar
                title={item.description}
                subtitle="subtitle"
-               avatar={{ uri: item.image }}
+               onPress={() => navigate('Detail', {})}
+               avatar={require('../images/badges/badge.png')}
                containerStyle={{ borderBottomWidth: 0 }}
                />)}
             keyExtractor={item => item.image}

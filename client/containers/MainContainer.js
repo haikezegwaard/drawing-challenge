@@ -30,6 +30,7 @@ class MainContainer extends Component {
 function mapState(state) {
   return {
     challenges: state.challenges,
+    auth: state.auth,
   };
 }
 

@@ -7,12 +7,16 @@ import Main from '../containers/MainContainer';
 import Profile from '../components/profile';
 import Listing from '../containers/ListingContainer';
 import Submit from '../containers/SubmitFormContainer';
+import Detail from '../containers/DetailContainer';
+import AuthContainer from '../containers/AuthContainer';
 
 export const AppNavigator = TabNavigator({
   Main: { screen: Main },
-  Profile: { screen: Profile },
   Listing: {screen: Listing },
   Submit: {screen: Submit },
+  Profile: { screen: Profile },
+  Detail: {screen: Detail },
+  Login: {screen: AuthContainer },
 },{
   tabBarPosition: 'top',
   animationEnabled: true,

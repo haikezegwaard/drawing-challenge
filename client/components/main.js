@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {View, Text, FlatList } from 'react-native';
 
-import { Card, ListItem, Button, Header, Tile } from 'react-native-elements'
+import { Card, ListItem, Button, Header, Tile } from 'react-native-elements';
 
 export default class Main extends Component {
   static navigationOptions = {
@@ -10,7 +10,23 @@ export default class Main extends Component {
   };
   render() {
     const { navigate } = this.props.navigation;
-    const { challenges } = this.props;
+    const { challenges, auth } = this.props;
+    let loginmsg = <Button
+            icon={{name: 'account-circle'}}
+            backgroundColor='#03A9F4'
+            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, marginTop: 10}}
+            title='Inloggen!'
+            onPress={() => navigate('Login', {}) }
+          />;
+    if(auth.loggedin){
+      loginmsg = <Button
+            icon={{name: 'camera'}}
+            backgroundColor='#03A9F4'
+            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, marginTop: 10}}
+            title='Meedoen!'
+            onPress={() => navigate('Submit', {}) }
+          />;
+    }
     return (
       <View>
         <Card
@@ -28,14 +44,9 @@ export default class Main extends Component {
           molestie mauris pulvinar sagittis. Class aptent taciti sociosqu ad litora
           torquent per conubia nostra, per inceptos himenaeos.
           </Text>
-          <Button
-            icon={{name: 'camera'}}
-            backgroundColor='#03A9F4'
-            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-            title='Meedoen!'
-            onPress={() => navigate('Submit', {}) }
-          />
+
         </Card>
+        {loginmsg}
       </View>
 
     );

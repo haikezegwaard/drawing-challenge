@@ -1,25 +1,18 @@
 import React, { Component } from 'react';
-import {Button, View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
+import { Card, ListItem, Button, Header, Tile } from 'react-native-elements';
 
 export default class Profile extends Component {
   static navigationOptions = {
-    title: 'Profile',
+    title: 'Profiel',
   };
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View>
-        <Text>Profile!</Text>
-        <FlatList
-          data={[{key: 'a'}, {key: 'b'}]}
-          renderItem={({item}) => <Text>{item.key}</Text>}
-        />
-        <Button
-        title="Go back to home"
-        onPress={() =>
-          navigate('Main', {})
-        }
-      />
+        <Card title="Mijn profiel">
+
+                  </Card>
       </View>
     );
   }
